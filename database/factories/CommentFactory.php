@@ -25,23 +25,10 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
-        //switch ($this->faker->randomElement(['product', 'post', 'anime'])) {
-        switch ($this->faker->randomElement(['post'])) {
-            case 'product':
-                $commentable = Product::inRandomOrder()->first();
-            break;
-            case 'post':
-                $commentable = Post::inRandomOrder()->first();
-            break;
-            case 'anime':
-                $commentable = Anime::inRandomOrder()->first();
-            break;
-         }
-
         return [
             'user_id' => User::inRandomOrder()->first()->id,
-            'commentable_id' => $commentable->id,
-            'commentable_type' => get_class($commentable),
+            'commentable_id' => null,
+            'commentable_type' => null,
             'message' => $this->faker->paragraph,
         ];
     }

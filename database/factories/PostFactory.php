@@ -41,8 +41,7 @@ class PostFactory extends Factory
         return $this->afterMaking(function (Post $post) {
             //
         })->afterCreating(function (Post $post) {
-            //$post->comments()->save(Comment::factory()->make());
-            $post->comments()->save(Comment::factory()->make(['commentable_id'=> $post->id, 'commentable_type'=> get_class($post)]));
+            $post->comments()->save(Comment::factory()->make());
         });
     }
 }

@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('intro');
             $table->text('content');
             $table->boolean('is_published')->default(false)->index();
-            $table->foreignId('user_id')->constrained('users')->index();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

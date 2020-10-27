@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->index();
+            $table->foreignId('user_id')->constrained('users');
             $table->integer('status');
             $table->text('shipping_address');
             $table->text('billing_address');
@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
         });
 
         Schema::create('order_product', function (Blueprint $table) {
-            $table->foreignId('order_id')->constrained('orders')->index();
+            $table->foreignId('order_id')->constrained('orders');
             $table->integer('product_id')->index();
             $table->integer('price');
             $table->integer('tax');

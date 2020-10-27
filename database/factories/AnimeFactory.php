@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Anime;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AnimeFactory extends Factory
@@ -35,5 +36,14 @@ class AnimeFactory extends Factory
             'end_diff' => $this->faker->date('d-m-Y', 'now'),
             'rated' => $this->faker->randomDigit,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (Anime $anime) {
+            //
+        })->afterCreating(function (Anime $anime) {
+            $anime->comments()->save(Comment::factory()->make());
+        });
     }
 }

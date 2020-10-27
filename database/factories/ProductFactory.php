@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -33,5 +34,14 @@ class ProductFactory extends Factory
             'tax' => $this->faker->randomFloat(2, 0, 2),
             'stock' => $this->faker->numberBetween(0, 100),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (Product $product) {
+            //
+        })->afterCreating(function (Product $product) {
+            $product->comments()->save(Comment::factory()->make());
+        });
     }
 }
