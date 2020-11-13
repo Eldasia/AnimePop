@@ -20,7 +20,7 @@ class CreateAnimesTable extends Migration
             $table->string('slug')->unique();
             $table->string('mal_url');
             $table->string('img_url');
-            $table->string('genre');
+            $table->string('type');
             $table->text('synopsis');
             $table->integer('episodes');
             $table->datetime('start_diff')->nullable();

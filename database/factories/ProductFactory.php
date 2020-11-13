@@ -26,12 +26,11 @@ class ProductFactory extends Factory
         $title = $this->faker->sentence;
         return [
             'name' => $title,
-            'type' => 'product',
             'slug' => Str::slug($title),
             'image' => $this->faker->imageUrl(640, 480),
             'description' => $this->faker->paragraph,
             'price' => $this->faker->randomFloat(2, 5, 20),
-            'tax' => $this->faker->randomFloat(2, 0, 2),
+            'tax' => 20,
             'stock' => $this->faker->numberBetween(0, 100),
         ];
     }

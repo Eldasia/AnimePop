@@ -32,7 +32,7 @@ class PostFactory extends Factory
             'intro' => $this->faker->sentence,
             'content' => $this->faker->paragraph(3, true),
             'is_published' => $this->faker->boolean,
-            'user_id' => User::factory(),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 

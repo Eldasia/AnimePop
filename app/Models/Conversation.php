@@ -17,9 +17,9 @@ class Conversation extends Model
     /**
      * Users
      */
-    public function user(): BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
     }
 
     /**

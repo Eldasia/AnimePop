@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Anime;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class AnimeFactory extends Factory
 {
@@ -26,10 +27,11 @@ class AnimeFactory extends Factory
     
         return [
             'title' => $title,
-            'type' => 'anime',
+            'slug' => Str::slug($title),
+            'mal_id' => $this->faker->randomNumber(3, true),
             'mal_url' => $this->faker->url,
             'img_url' => $this->faker->imageUrl(200, 300),
-            'genre' => $this->faker->word,
+            'type' => $this->faker->word,
             'synopsis' => $this->faker->paragraphs(2, true),
             'episodes' => $this->faker->randomNumber(3, true),
             'start_diff' => $this->faker->date('d-m-Y', 'now'),

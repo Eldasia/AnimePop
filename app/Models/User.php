@@ -64,7 +64,7 @@ class User extends Authenticatable
      */
     public function conversations(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\Conversation');
+        return $this->belongsToMany('App\Models\Conversation')->withTimestamps();
     }
 
     /**
