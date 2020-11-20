@@ -27,7 +27,8 @@ class Post extends Model
     ];
 
     protected $appends = [
-        "view_url"
+        "view_url",
+        "created_at_for_human"
     ];
 
     /**
@@ -76,6 +77,11 @@ class Post extends Model
     public function getViewUrlAttribute()
     {
         return route('post', $this);
+    }
+
+    public function getCreatedAtForHumanAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
     public function scopePublished(Builder $query)

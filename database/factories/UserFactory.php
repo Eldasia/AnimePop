@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -37,7 +36,12 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user) {
-            $user->posts()->save(Post::factory()->make(['user_id'=> $user->id]));
+            $posts = [];
+            for ($i = 0; $i < $this->faker->numberBetween(3,5); $i++){
+                $posts[$i] = Post::factory()->make(['user_id' => $user->id]);
+            }
+
+            $user->posts()->saveMany($posts);
         })->afterMaking(function (User $user) {
             //
         });
