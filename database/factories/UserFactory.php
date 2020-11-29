@@ -36,12 +36,7 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user) {
-            $posts = [];
-            for ($i = 0; $i < $this->faker->numberBetween(3,5); $i++){
-                $posts[$i] = Post::factory()->make(['user_id' => $user->id]);
-            }
-
-            $user->posts()->saveMany($posts);
+            //
         })->afterMaking(function (User $user) {
             //
         });

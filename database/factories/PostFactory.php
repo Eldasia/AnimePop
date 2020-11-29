@@ -41,7 +41,7 @@ class PostFactory extends Factory
         return $this->afterMaking(function (Post $post) {
             //
         })->afterCreating(function (Post $post) {
-            $post->comments()->save(Comment::factory()->make());
+            $post->comments()->saveMany(Comment::factory($this->faker->numberBetween(1,3))->make());
         });
     }
 }

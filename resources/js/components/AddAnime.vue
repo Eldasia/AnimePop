@@ -56,7 +56,7 @@
             },
             add(anime){
                 this.adding = true
-                axios.post(`/api/animes`, {
+                axios.post(`/api/animes/store`, {
                     mal_id: anime.mal_id
                 }).then(response => {
                     this.query = ""

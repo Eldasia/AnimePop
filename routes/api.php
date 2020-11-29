@@ -18,11 +18,11 @@ Route::get('/search', function (Request $request) {
 });
 
 Route::get('/posts', [PostController::class, 'all']);
-Route::get('/post/{post:id}', [PostController::class, 'show']);
 
-Route::get('/comment/{post:id}', [CommentController::class, 'show']);
-Route::delete('/comment/{post:id}/{comment:id}', [CommentController::class, 'delete']);
-Route::post('/comment/{post:id}', [CommentController::class, 'add']);
+Route::get('/comments/{type}/{id}', [CommentController::class, 'show']);
+// Route::delete('/comment/{commentable:id}/{comment:id}', [CommentController::class, 'delete']);
+// Route::post('/comment/{commentable:id}', [CommentController::class, 'add']);
 
-Route::post('/animes', [AnimeController::class, 'store']);
+Route::get('/animes', [AnimeController::class, 'list']);
+Route::post('/animes/store', [AnimeController::class, 'store']);
 Route::post('/animes/search', [AnimeController::class, 'search']);

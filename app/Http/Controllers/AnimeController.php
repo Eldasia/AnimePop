@@ -10,9 +10,7 @@ class AnimeController extends Controller
 {
     public function list()
     {
-        $animes = Anime::get();
-
-        return view('animesList')->with(['animes' => $animes]);
+        return view('animesList');
     }
 
     public function show(Anime $anime)

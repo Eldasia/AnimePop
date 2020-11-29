@@ -57,23 +57,30 @@
             this.fetch()
         },
         props: {
-            id: Number,
-            author: Object
+            type: {
+                type: String,
+                required: true,
+                validator: (value) => ['post', 'product', 'anime'].indexOf(value) != -1
+            },
+            id: {
+                type: Number,
+                required: true
+            }
         },
         methods: {
             fetch(){
                 this.fetching = true
-                axios.get(`/api/comment/${this.id}`).then(response => {
-                    this.fetching = false,
-                    this.comments = response.data
-                    this.showSelected()
+                axios.get(`/api/comments/${this.type}/${this.id}`).then(({data, status})=> {
+                    this.fetching = false;
+                    this.comments = data.data;
+                    this.showSelected();
                 }).catch(error => {
                     this.fetching = false
                 })
             },
             add(){
                 this.adding = true
-                axios.post(`/api/comment/${this.id}`, {
+                axios.post(`/api/comment/${this.commentable.id}`, {
                     message: this.comment,
                 }).then(response => {
                     this.adding = false
@@ -84,7 +91,7 @@
                 })
             },
             remove(comment){
-                axios.delete(`/api/comment/${this.id}/${comment.id}`).then(response => {
+                axios.delete(`/api/comment/${this.commentable.id}/${comment.id}`).then(response => {
                     this.fetch()
                 }).catch(error => alert("Impossible de supprimer le commentaire :'("))
             },
@@ -104,7 +111,7 @@
         },
         computed: {
             canManage() {
-                return this.$root.user != null && this.$root.user.id == this.author.id
+                return this.$root.user != null && this.$root.user.id == this.user.id
             },
             hasComments(){
                 return this.comments.length > 0

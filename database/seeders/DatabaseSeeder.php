@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Post;
 use App\Models\Anime;
 use App\Models\Product;
 use App\Models\Tag;
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'maureen@exemple.com',
             ]);
         User::factory(5)->create();
+        Post::factory(10)->create();
         Anime::factory(5)->create();
         Product::factory(5)->create();
         Tag::factory(5)->create();

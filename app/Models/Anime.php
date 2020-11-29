@@ -33,6 +33,10 @@ class Anime extends Model
         'end_diff'
     ];
 
+    protected $appends = [
+        "view_url"
+    ];
+
     /**
      * Users
      */

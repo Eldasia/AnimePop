@@ -3,23 +3,47 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Post;
+use App\Models\Anime;
 use App\Models\Comment;
 use App\Http\Controllers\API\ApiController;
+use App\Http\Resources\CommentResource;
+use App\Models\Product;
 use App\Notifications\NotifyPostAuthorOnNewComment;
 
 class CommentController extends ApiController
 {
+
     public function __construct()
     {
         parent::__construct();
         $this->middleware('auth:api')->except('show');
     }
     
-    public function show(Post $post)
+    public function show($type, $id)
     {
-        return Comment::with('user')->where('post_id', $post->id)->get();
         
+        switch($type)
+        {
+            case 'anime':
+                $model = Anime::with('comments.user')->findOrFail($id);
+            break;
+
+            case 'post':
+                $model = Post::with('comments.user')->findOrFail($id);
+            break;
+
+            case 'product':
+                $model = Product::with('comments.user')->findOrFail($id);
+            break;
+
+            default:
+                abort(404);
+            break;
+        }
+
+        return CommentResource::collection($model->comments);
     }
 
     public function add(Request $request, Post $post)
@@ -38,9 +62,9 @@ class CommentController extends ApiController
             'user_id' => $request->user()->id,
         ]);
 
-        if ($post->user_id != $comment->user_id) {
-            $post->user->notify(new NotifyPostAuthorOnNewComment($post, $comment));
-        }
+        // if ($post->user_id != $comment->user_id) {
+        //     $post->user->notify(new NotifyPostAuthorOnNewComment($post, $comment));
+        // }
         
         return $comment;
     }

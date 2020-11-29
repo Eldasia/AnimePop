@@ -27,7 +27,6 @@
         },
         methods: {
             fetch(){
-                console.log('here');
                 this.fetching = true
                 axios.get(`/api/posts`).then(response => {
                     this.fetching = false,

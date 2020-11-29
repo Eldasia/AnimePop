@@ -18,6 +18,11 @@ class AnimeController extends ApiController
         $this->middleware('auth:api')->only('store');
     }
 
+    public function list()
+    {
+        return Anime::get();
+    }
+
     public function search(Request $request)
     {
         $validated = $this->validate($request, [
